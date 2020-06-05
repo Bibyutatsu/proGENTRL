@@ -37,11 +37,12 @@ Now when you open jupyter notebook. Go to **Change Kernel** > **rdkit_kernel**
 
 With these the installation is over and now we are ready to run the `Example.ipynb` notebook provided in the Repo.
 
-##`Example.ipynb`
+##Example.ipynb
+
 This notebook is a good starting point to look at how proGENTRL works. It incorporates all the steps from *VAE Training* to *Reinforcement Learning* and finally *Sampling* or generation of new molecules in the form of SMILES strings.
 
 The basic flow of the model is:
-VAE Train &#8594; Reinforcement Learning &#8594; Sampling
+**VAE Train** :arrow_right: **Reinforcement Learning** :arrow_right: **Sampling**
 
 Below we show examples of generated molecules (more samples [here](https://github.com/Bibyutatsu/GENTRL/blob/master/images/Sampling_big.png)). You can find more explanations in my originarlly forked Repo of GENTRL please visit [here](https://github.com/Bibyutatsu/GENTRL)
 
