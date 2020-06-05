@@ -37,7 +37,7 @@ Now when you open jupyter notebook. Go to **Change Kernel** > **rdkit_kernel**
 
 With these the installation is over and now we are ready to run the `Example.ipynb` notebook provided in the Repo.
 
-##Example.ipynb
+## Example.ipynb
 
 This notebook is a good starting point to look at how proGENTRL works. It incorporates all the steps from *VAE Training* to *Reinforcement Learning* and finally *Sampling* or generation of new molecules in the form of SMILES strings.
 
