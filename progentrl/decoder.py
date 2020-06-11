@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from gentrl.tokenizer import get_vocab_size, encode, decode
+from progentrl.tokenizer import get_vocab_size, encode, decode
 
 
 class DilConvDecoder(nn.Module):

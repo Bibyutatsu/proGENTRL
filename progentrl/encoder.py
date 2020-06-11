@@ -1,6 +1,6 @@
 import torch
 from torch import nn
-from gentrl.tokenizer import encode, get_vocab_size
+from progentrl.tokenizer import encode, get_vocab_size
 
 
 class RNNEncoder(nn.Module):

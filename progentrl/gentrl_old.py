@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 from math import pi, log
-from gentrl.lp import LP
+from progentrl.lp import LP
 import pickle
 
 from moses.metrics.utils import get_mol
