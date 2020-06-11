@@ -112,8 +112,8 @@ class LP(nn.Module):
             contr_vect[torch.arange(x.shape[0]), x.long().cpu()] = 1
         elif var[0] == 'c':
             cur_vals = x[:, None]
-            cur_stds = torch.exp(log_stds)[None, :]
-            cur_means = means[None, :]
+            cur_stds = torch.exp(log_stds)[None, :].to(x.device)
+            cur_means = means[None, :].to(x.device)
 
             contr_vect = (cur_vals - cur_means) / cur_stds
             contr_vect = torch.exp(-0.5 * (contr_vect ** 2))
@@ -167,7 +167,7 @@ class LP(nn.Module):
         norm_pref = norm_pref.to(x.device)
 
         for i, (core, var) in enumerate(zip(perm_cores, perm_dist_descr)):
-            core = self._pos_func(core)
+            core = self._pos_func(core).to(x.device)
 
             if perm_marg[i]:
                 cond_core = core.sum(dim=0)[None, :, :]

@@ -48,3 +48,8 @@ def load(model, folder_to_load='./'):
     model.dec.load_state_dict(torch.load(dec_file))
     model.lp.load_state_dict(torch.load(lp_file))
     return model
+
+def free_cuda_mem(tensors):
+    for tensor in tensors:
+        del tensor
+    torch.cuda.empty_cache()
