@@ -10,10 +10,9 @@ setup(
         'numpy>=1.15',
         'pandas>=0.23',
         'scipy>=1.1.0',
-        'torch==1.0.1',
-        'molsets==0.1.3',
+        'molsets',
         'scikit-learn>=0.21.3',
-        'pytorch-lightning==0.7.6'
+        'pytorch-lightning>=0.7.6',
         'joblib>=0.13.2'
     ],
     description='Pro Generative Tensorial Reinforcement Learning (proGENTRL)',

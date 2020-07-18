@@ -27,7 +27,14 @@ cd <Path_to_proGENTRL_folder>
 python3 setup.py install
 ```
 
-## Step 3 : (Optional)
+## Step 3 :
+Then I will suggest you install pytorch's latest version according to your cuda version (For e.g. 10.2)
+```
+python3 -m pip uninstall torch torchvision
+conda install pytorch torchvision cudatoolkit=10.2 -c pytorch
+```
+
+## Step 4 : (Optional)
 Making a new **Kernel** for jupyter notebook is recommended. For making a new kernel please follow these steps.
 ```
 python3 -m pip install ipykernel
