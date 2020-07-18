@@ -92,6 +92,37 @@ class GENTRL_VAELP(pl.LightningModule):
             'log_p_z_by_y': log_p_z_by_y.mean()
         }
     
+    def reinit_from_data(self):
+        to_reinit = True
+        for x_batch, y_batch in self.train_dataloader():
+            y_batch = y_batch.float().to(self.lp.tt_cores[0].device)
+            if to_reinit:
+                if len(y_batch.shape) == 1:
+                    y_batch = y_batch.view(-1, 1).contiguous()
+                    
+                if (self.buf is None) or (self.buf.shape[0] < 5000):
+                    enc_out = self.enc(x_batch)
+                    means, log_stds = torch.split(enc_out,
+                                                  len(self.latent_descr),
+                                                  dim=1)
+                    z_batch = (means + torch.randn_like(log_stds) *
+                               torch.exp(0.5 * log_stds))
+                    cur_batch = torch.cat([z_batch, y_batch], dim=1)
+                    if self.buf is None:
+                        self.buf = cur_batch
+                    else:
+                        self.buf = torch.cat([self.buf, cur_batch])
+                else:
+                    descr = len(self.latent_descr) * [0]
+                    descr += len(self.feature_descr) * [1]
+                    self.lp.reinit_from_data(self.buf, descr)
+                    self.lp.to(self.device)
+                    self.buf = None
+                    to_reinit = False
+            else:
+                print('reinit Done from data')
+                break
+    
     
     def forward(self, num_samples):
         z = self.lp.sample(num_samples, 50 * ['s'] + ['m'])
@@ -100,45 +131,19 @@ class GENTRL_VAELP(pl.LightningModule):
     
     
     def training_step(self, batch, batch_idx):
+        if self.current_epoch in [0, 1, 5] and batch_idx==0:
+            self.reinit_from_data()
         
-        if self.current_epoch in [0, 1, 5]:
-            to_reinit = True
-        else:
-            to_reinit = False
-
         x_batch, y_batch = batch
-        if len(y_batch.shape) == 1:
-            y_batch = y_batch.view(-1, 1).contiguous()
-
-        if to_reinit:
-            if (self.buf is None) or (self.buf.shape[0] < 5000):
-                enc_out = self.enc(x_batch)
-                means, log_stds = torch.split(enc_out,
-                                              len(self.latent_descr),
-                                              dim=1)
-                z_batch = (means + torch.randn_like(log_stds) *
-                           torch.exp(0.5 * log_stds))
-                cur_batch = torch.cat([z_batch, y_batch], dim=1)
-                if self.buf is None:
-                    self.buf = cur_batch
-                else:
-                    self.buf = torch.cat([self.buf, cur_batch])
-            else:
-                descr = len(self.latent_descr) * [0]
-                descr += len(self.feature_descr) * [1]
-                self.lp.reinit_from_data(self.buf, descr)
-                self.buf = None
-                to_reinit = False
-
         elbo, cur_stats = self.get_elbo(x_batch, y_batch)
         loss = -elbo
-        
+
         output_dict = OrderedDict({
             'loss': loss,
             'log': cur_stats,
             'progress_bar': cur_stats
         })
-        
+
         return output_dict
     
     def configure_optimizers(self):
