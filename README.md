@@ -22,8 +22,16 @@ conda activate my-rdkit-env
 
 ## Step 2 :
 Inside this environment install proGENTRL.
+
+**Using pip (Recommended)**
 ```
-cd <Path_to_proGENTRL_folder>
+pip install progentrl
+```
+
+**Using source**
+```
+git clone https://github.com/Bibyutatsu/proGENTRL.git
+cd proGENTRL
 python3 setup.py install
 ```
 
@@ -44,7 +52,7 @@ Now when you open jupyter notebook. Go to **Change Kernel** > **rdkit_kernel**
 
 With these the installation is over and now we are ready to run the `Example.ipynb` notebook provided in the Repo.
 
-## Example.ipynb
+## [Example.ipynb](https://github.com/Bibyutatsu/proGENTRL/blob/master/Example.ipynb)
 
 This notebook is a good starting point to look at how proGENTRL works. It incorporates all the steps from *VAE Training* to *Reinforcement Learning* and finally *Sampling* or generation of new molecules in the form of SMILES strings.
 
@@ -54,6 +62,8 @@ The basic flow of the model is:
 Below we show examples of generated molecules (more samples [here](https://github.com/Bibyutatsu/GENTRL/blob/master/images/Sampling_big.png)). You can find more explanations in my originarlly forked Repo of GENTRL please visit [here](https://github.com/Bibyutatsu/GENTRL)
 
 ![Sampling](https://raw.githubusercontent.com/Bibyutatsu/proGENTRL/master/images/Sampling.jpeg)
+
+For reading more  visit my [blog](https://bibyutatsu.github.io/Blogs/)
 
 
 Supporting Information for the paper _"[Deep learning enables rapid identification of potent DDR1 kinase inhibitors](https://www.nature.com/articles/s41587-019-0224-x)"_.
