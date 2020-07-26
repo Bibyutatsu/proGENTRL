@@ -5,7 +5,7 @@ This is a [Pytorch Lightning](https://github.com/PyTorchLightning/pytorch-lightn
 ## What is GENTRL?
 The GENTRL model is a variational autoencoder with a rich prior distribution of the latent space. We used tensor decompositions to encode the relations between molecular structures and their properties and to learn on data with missing values. We train the model in two steps. First, we learn a mapping of a chemical space on the latent manifold by maximizing the evidence lower bound. We then freeze all the parameters except for the learnable prior and explore the chemical space to find molecules with a high reward.
 
-![GENTRL](images/gentrl.png)
+![GENTRL](https://raw.githubusercontent.com/Bibyutatsu/proGENTRL/master/images/gentrl.png)
 
 # Installation
 
@@ -53,7 +53,7 @@ The basic flow of the model is:
 
 Below we show examples of generated molecules (more samples [here](https://github.com/Bibyutatsu/GENTRL/blob/master/images/Sampling_big.png)). You can find more explanations in my originarlly forked Repo of GENTRL please visit [here](https://github.com/Bibyutatsu/GENTRL)
 
-![Sampling](https://github.com/Bibyutatsu/GENTRL/blob/master/images/Sampling.jpeg)
+![Sampling](https://raw.githubusercontent.com/Bibyutatsu/proGENTRL/master/images/Sampling.jpeg)
 
 
 Supporting Information for the paper _"[Deep learning enables rapid identification of potent DDR1 kinase inhibitors](https://www.nature.com/articles/s41587-019-0224-x)"_.
